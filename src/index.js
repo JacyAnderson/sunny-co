@@ -1,11 +1,13 @@
+/*global firebaseui*/
+/*global firebase*/
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './App';
 import './index.css';
 import * as firebase from 'firebase';
-import Header from './components/Header';
-import MyAwesomeReactComponent from './components/MyAwesomeReactComponent';
 
-
+// Require for use with Material UI
 const injectTapEventPlugin = require("react-tap-event-plugin");
 injectTapEventPlugin();
 
@@ -25,16 +27,11 @@ const fb = firebase
   .database()
   .ref();
 
+// Firebase UI
+const firebaseui = require('firebaseui');
 
-class App extends React.Component {
-	render() {
-		return(
-			<div>
-				<Header/>	
-				
-			</div>
-		)	
-	}
-}
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(
+	<App/>, 
+	document.getElementById('root')
+);

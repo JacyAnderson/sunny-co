@@ -24,11 +24,9 @@ export default class Header extends React.Component {
 					</IconButton>}
 					anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
 					targetOrigin={{horizontal: 'right', vertical: 'bottom'}}>
-					<MenuItem primaryText="Refresh" />
-					<MenuItem primaryText="Send feedback" />
-					<MenuItem primaryText="Settings" />
-					<MenuItem primaryText="Help" />
-					<MenuItem primaryText="Sign out" />
+					<MenuItem primaryText="Account" />
+					<MenuItem primaryText="Log in" />
+					<MenuItem primaryText="Log out" />
 				</IconMenu>}>
 			</AppBar>
 			</MuiThemeProvider>
