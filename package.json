@@ -5,12 +5,16 @@
   "dependencies": {
     "firebase": "^4.0.0",
     "firebaseui": "^2.0.0",
+    "flexboxgrid": "^6.3.1",
+    "google-maps-react": "^1.0.19",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-router-dom": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1"
   },
   "devDependencies": {
     "babel-preset-stage-1": "^6.24.1",
+    "dotenv": "^4.0.0",
     "react-scripts": "1.0.7"
   },
   "scripts": {
