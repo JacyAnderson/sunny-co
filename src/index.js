@@ -3,9 +3,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as firebase from 'firebase';
-
 // App Components
 import App from './App';
+require('dotenv').config()
 
 // Firebase UI for Log in
 const firebaseui = require('firebaseui');
@@ -94,6 +94,7 @@ function initApp() {
 window.addEventListener('load', function() {
   initApp()
 });
+
 
 
 // Render App to the ReactDOM
