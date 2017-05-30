@@ -1,24 +1,14 @@
 import React from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-const styles = {
-  card: {
-  	margin: '0 auto',
-  	width: '35%',
-  }
-}
+// import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 export default class Login extends React.Component {
 	render() {
 		return(
-			<MuiThemeProvider>
-			<div>
-				<Card style={styles.card}>
+				<div>
+					<h3>Sign in to Some Sunshine</h3>
 					<div id="firebaseui-auth-container"></div>
-				</Card>
-			</div>
-			</MuiThemeProvider>
+				</div>
 		)
 	}
 }
