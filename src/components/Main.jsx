@@ -49,32 +49,28 @@ class WeatherList extends Component {
 }
 
 export default class Main extends Component {
-	constructor(props) {
-		console.log("In constructor");
-    super(props);
-    this.state = {
-      weatherState: ['loading...']
+	constructor() {
+		super();
+		this.getInfo = this.getInfo.bind(this);
+		this.state = {
+      weatherState: ['loading...'],
+      displayLocation: ['loading...']
     };
-  }
- 	
-
+	}
 	componentDidMount() {
-		console.log("In componentDidMount");
-	  axios.get('http://api.wunderground.com/api/446cb5ce2e39614f/conditions/q/CO/Denver.json')
+		console.log("Component did mounting");
+		this.getInfo();
+	}
+	getInfo() {
+		console.log("getting info from API");
+		axios.get('http://api.wunderground.com/api/446cb5ce2e39614f/conditions/q/CO/Denver.json')
   	.then((response)=>{ 
-  		// console.log(response.data.current_observation);
-  		const city = response.data.current_observation.display_location.city;
-			// const currentWeather = response.data.current_observation.weather;
-    	console.log(city);
     	if(response){
-
     		// Return sets response data as state
     		console.log('Status 200')
     		console.log(response.data);
-    		// return response.data.current_observation.weather;
+    		
     		return response.data;
-    		// console.log(response.data);
-    		// return response.data;
     	} else {
     		throw new Error("Server response wasn't ok");
     	}
@@ -86,6 +82,7 @@ export default class Main extends Component {
 
   		// Set the state to be equal to response data
   		this.setState({weatherState:responseData.current_observation});
+  		this.setState({displayLocation:responseData.current_observation.display_location})
   			console.log("The current state is:")
   			//Should be the current set state
   		 console.log(this.state);
@@ -93,27 +90,16 @@ export default class Main extends Component {
   	.catch((error)=>{
     	console.log(error);
   	});
-  	console.log("END OF componentDidMount");
+	}
 
-  }	
-
-  componentWillUnmount() {
-    this.serverRequest.abort();
-  }
-
-  // Pass the weatherState into the Weather list via props
 	render() {
-		// variable to shorten inputs
-		const s = this.state.weatherState;
-		// console.log(typeof(this.state.weatherState.display_location.city));
-		// console.log(loc);
+		console.log("rendering");
 		return (
-			// <HomebaseLoc homebase={s.display_location.city} />
-			<div>	
-				
-				<CurrentWeather weather={s.weather}/>
+			<div>		
+				<h1>{this.state.displayLocation.city}</h1>
+				<CurrentWeather weather={this.state.weatherState.weather}/>
 				<PlaceList places={places}/>
-			</div>
-		)
+	 		</div>
+		);
 	}
 }
