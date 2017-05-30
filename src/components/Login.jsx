@@ -6,7 +6,7 @@ export default class Login extends React.Component {
 	render() {
 		return(
 				<div>
-					<h3>Sign in to Sunny</h3>
+					<h3>Sign in to Some Sunshine</h3>
 					<div id="firebaseui-auth-container"></div>
 				</div>
 		)

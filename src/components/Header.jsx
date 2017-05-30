@@ -10,6 +10,9 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
+const appBarStyle = {
+  width: '100vw'
+};
 
 function signOut() {
 firebase.auth().signOut().then(function() {
@@ -24,7 +27,7 @@ export default class Header extends React.Component {
 		return(
 			<MuiThemeProvider>
 			<div>
-					<AppBar title="Sunny Somewhere" 
+					<AppBar title="Sunny Somewhere" style={appBarStyle}
 					showMenuIconButton={false} 
 					iconElementRight={
 						<IconMenu iconButtonElement={
@@ -34,7 +37,7 @@ export default class Header extends React.Component {
 							anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
 							targetOrigin={{horizontal: 'right', vertical: 'top'}}>
 							<NavLink to="/set-home"><MenuItem primaryText="Account" /></NavLink>
-							<NavLink to="/login"><MenuItem primaryText="Log in"></MenuItem></NavLink>
+							<NavLink to="/"><MenuItem primaryText="Log in"></MenuItem></NavLink>
 							<a><MenuItem primaryText="Log out" onClick={signOut}/></a>
 						</IconMenu>}>
 					</AppBar>

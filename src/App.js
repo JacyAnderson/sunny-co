@@ -20,7 +20,7 @@ export default class App extends React.Component {
     		<MuiThemeProvider>
       	<div>
         	<Header/> 
-        	<Route path="/login" component={Login}/>
+        	<Route exact path="/" component={Login}/>
         	<Route path="/set-home" component={Homebase}/>
         	<Route path="/main"component={Main}/>
       	</div>
