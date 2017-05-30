@@ -1,15 +1,15 @@
 import React from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardActions, CardMedia, CardTitle} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 // import GoogleApiComponent from './GoogleApiComponent';
 import TextField from 'material-ui/TextField';
 
-const buttonStyle = {
-  margin: 12,
-  width: '50%'
-};
+// const buttonStyle = {
+//   margin: 12,
+//   width: '50%'
+// };
 
 const cardStyle = {
 	margin: '0 auto',
