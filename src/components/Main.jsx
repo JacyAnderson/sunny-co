@@ -20,6 +20,21 @@ function PlaceList(props) {
 }
  const places = ["Denver", "Boulder", "Fort Collins", "Nederland"];
 
+
+function HomebaseLoc(props) {
+	const homebase = props.homebase;
+	return (
+		<h1>{homebase}</h1>
+	)
+}
+
+function CurrentWeather(props) {
+	const weather = props.weather;
+	return(
+	<p>{weather}</p>
+	)
+}
+
 class WeatherList extends Component {
 	render() {
 		if(!this.props.weather) {
@@ -38,7 +53,7 @@ export default class Main extends Component {
 		console.log("In constructor");
     super(props);
     this.state = {
-      weatherState: []
+      weatherState: ['loading...']
     };
   }
  	
@@ -88,10 +103,15 @@ export default class Main extends Component {
 
   // Pass the weatherState into the Weather list via props
 	render() {
+		// variable to shorten inputs
+		const s = this.state.weatherState;
+		// console.log(typeof(this.state.weatherState.display_location.city));
+		// console.log(loc);
 		return (
-			<div>
-				<h1>The weather in {places[0]} is:</h1>
+			// <HomebaseLoc homebase={s.display_location.city} />
+			<div>	
 				
+				<CurrentWeather weather={s.weather}/>
 				<PlaceList places={places}/>
 			</div>
 		)
