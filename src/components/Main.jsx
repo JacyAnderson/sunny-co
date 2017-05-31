@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Divider from 'material-ui/Divider';
+
+import WeatherCard from './WeatherCard';
+
+const coConditionsUrl = "http://api.wunderground.com/api/446cb5ce2e39614f/conditions/q/CO/"
+const homeBase = "Denver";
+
+const headingStyle = {
+	marginLeft: "8vw"
+}
 
 function ListItem(props) {
 	return (
@@ -7,33 +18,20 @@ function ListItem(props) {
 	)
 }
 
-
 function PlaceList(props) {
 	const places = props.places;
-	const listItems = places.map((place) => 
-		// Pass Key to list item so React can identify which items have changed
-		<ListItem key={place.toString()} value={place} />
+	const listItems = places.map((place) =>
+	// Pass Key to list item so React can identify which items have changed 
+		// <ListItem key={place.toString()} value={place} />
+		<div>
+			<WeatherCard city={place}/>
+		</div>
 	);
 	return (
 		<ul> {listItems} </ul>
 	);
 }
- const places = ["Denver", "Boulder", "Fort Collins", "Nederland"];
-
-
-function HomebaseLoc(props) {
-	const homebase = props.homebase;
-	return (
-		<h1>{homebase}</h1>
-	)
-}
-
-function CurrentWeather(props) {
-	const weather = props.weather;
-	return(
-	<p>{weather}</p>
-	)
-}
+ const places = ["Boulder", "Fort Collins", "Colorado Springs", "Estes Park", "Pueblo", "Ouray"];
 
 class WeatherList extends Component {
 	render() {
@@ -51,19 +49,25 @@ class WeatherList extends Component {
 export default class Main extends Component {
 	constructor() {
 		super();
+		// Bind getInfo to Main's "this"
 		this.getInfo = this.getInfo.bind(this);
+		// Set initial state
 		this.state = {
       weatherState: ['loading...'],
       displayLocation: ['loading...']
     };
 	}
+	// Run get info function
 	componentDidMount() {
 		console.log("Component did mounting");
 		this.getInfo();
 	}
 	getInfo() {
 		console.log("getting info from API");
-		axios.get('http://api.wunderground.com/api/446cb5ce2e39614f/conditions/q/CO/Denver.json')
+
+		const locations = ["Boulder", "Fort Collins", "Colorado Springs", "Estes Park", "Pueblo", "Grand Junction"];
+		// Get current conditions
+		axios.get(''+ coConditionsUrl + homeBase + '.json')
   	.then((response)=>{ 
     	if(response){
     		// Return sets response data as state
@@ -94,12 +98,17 @@ export default class Main extends Component {
 
 	render() {
 		console.log("rendering");
+				// <PlaceList places={places}/>
 		return (
-			<div>		
-				<h1>{this.state.displayLocation.city}</h1>
-				<CurrentWeather weather={this.state.weatherState.weather}/>
+			<MuiThemeProvider>
+			<div>
+				<h3 style={headingStyle}>Your Homebase</h3>
+				<WeatherCard city={this.state.displayLocation.city} weather={this.state.weatherState.weather} icon={this.state.weatherState.icon_url} currentTemp={this.state.weatherState.temp_f}/>
+				<Divider />
+				<h3 style={headingStyle}>Everywhere Else!</h3>
 				<PlaceList places={places}/>
-	 		</div>
+			</div>
+	 		</MuiThemeProvider>
 		);
 	}
 }

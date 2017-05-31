@@ -36,6 +36,7 @@ export default class Header extends React.Component {
 							</IconButton>}
 							anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
 							targetOrigin={{horizontal: 'right', vertical: 'top'}}>
+							<NavLink to="/main"><MenuItem primaryText="Get Sunny!"></MenuItem></NavLink>
 							<NavLink to="/set-home"><MenuItem primaryText="Account" /></NavLink>
 							<NavLink to="/"><MenuItem primaryText="Log in"></MenuItem></NavLink>
 							<a><MenuItem primaryText="Log out" onClick={signOut}/></a>
