@@ -20,7 +20,6 @@ const icon = {
 
 export default class WeatherCard extends Component {
 	render() {
-		console.log("rendering");
 		return (
 			<MuiThemeProvider>
 			<div>

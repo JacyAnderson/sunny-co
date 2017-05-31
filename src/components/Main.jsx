@@ -1,9 +1,13 @@
+'use strict'
+
 import React, { Component } from 'react';
 import axios from 'axios';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Divider from 'material-ui/Divider';
 
 import WeatherCard from './WeatherCard';
+
+const locations = ["Boulder", "Fort Collins", "Colorado Springs", "Estes Park", "Pueblo", "Grand Junction"];
 
 const coConditionsUrl = "http://api.wunderground.com/api/446cb5ce2e39614f/conditions/q/CO/"
 const homeBase = "Denver";
@@ -17,6 +21,26 @@ function ListItem(props) {
 		<li>{props.value}</li>
 	)
 }
+
+function request() {
+	for (let i = 0; i < locations.length; i++) {
+		axios.get(''+ coConditionsUrl + locations[i] + '.json')
+  	.then((response)=>{ 
+    	if(response){
+    		// Return sets response data as state
+    		console.log('Status 200')
+    		console.log(response.data.current_observation.display_location);
+    		
+    		return response.data;
+    	} else {
+    		throw new Error("Server response wasn't ok");
+    	}
+  	});
+	}
+}
+
+// request();
+
 
 function PlaceList(props) {
 	const places = props.places;
@@ -64,8 +88,6 @@ export default class Main extends Component {
 	}
 	getInfo() {
 		console.log("getting info from API");
-
-		const locations = ["Boulder", "Fort Collins", "Colorado Springs", "Estes Park", "Pueblo", "Grand Junction"];
 		// Get current conditions
 		axios.get(''+ coConditionsUrl + homeBase + '.json')
   	.then((response)=>{ 
