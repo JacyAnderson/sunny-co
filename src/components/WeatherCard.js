@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import {Card, CardHeader, CardTitle } from 'material-ui/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
@@ -9,13 +8,6 @@ const cardStyle = {
 	marginTop: "30px",
 	marginBottom: "30px",
 	width: '75vw'
-}
-
-const icon = {
-	maxWidth: '60px',
-	maxHeight: 'auto',
-	minWidth: '60px',
-	width: '60px'
 }
 
 export default class WeatherCard extends Component {
