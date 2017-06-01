@@ -6,7 +6,25 @@ import WeatherCard from './WeatherCard';
 
 // Variables
 // const locations = ["Boulder", "Fort Collins", "Colorado Springs", "Estes Park", "Pueblo", "Grand Junction"];
+const locations = ["Boulder", "Fort Collins"];
 const coConditionsUrl = "http://api.wunderground.com/api/446cb5ce2e39614f/conditions/q/CO/";
+
+function allConditions() {
+	let conArr = [];
+	let locArr = [];
+	for (let i = 0; i < locations.length; i++) {
+		axios.get("" + coConditionsUrl + locations[i] + ".json")
+			.then(function(response) {
+				conArr.push(response.data.current_observation);
+				locArr.push(response.data.current_observation.display_location);
+			})
+			.catch(function(response) {
+				console.log(response);
+			})
+	}
+	console.log(locArr);
+	return [conArr, locArr];
+}
 
 export default class PlacesCard extends Component {
 	constructor() {
@@ -25,28 +43,22 @@ export default class PlacesCard extends Component {
 		this.getInfo();
 	}
 	getInfo() {
-		console.log(this.state);
 		// set this so you can pass it into axios.spread
 		var boundThis = this;
-		axios.all([
-			axios.get(''+ coConditionsUrl + 'Boulder.json'),
-			axios.get(''+ coConditionsUrl + 'Fort Collins.json'),
-			axios.get(''+ coConditionsUrl + 'Colorado Springs.json'),
-			axios.get(''+ coConditionsUrl + 'Estes Park.json'),
-			axios.get(''+ coConditionsUrl + 'Pueblo.json'),
-			axios.get(''+ coConditionsUrl + 'Grand Junction.json'),
-		])
-		.then(axios.spread(function(place) {
+		axios.all(allConditions())
+		.then(axios.spread(function(conditions, locations) {
 			console.log("In .then axios spread");
-			boundThis.setState({weatherState: place.data.current_observation});
-			boundThis.setState({displayLocation: place.data.current_observation.display_location});
-			// console.log(boundThis);
+			console.log(conditions);
+			console.log(locations);
+			boundThis.setState({weatherState: conditions});
+			boundThis.setState({displayLocation: locations});
+			console.log(boundThis.setState.weatherState);
+			console.log(boundThis.setState.displayLocation);
 		}))
 			.catch(error => console.log(error));
 		}
   	render() {
   		console.log("Rendering...");
-  		console.log(this.state.weatherState);
   		const wS = this.state.weatherState;
 			const dL = this.state.displayLocation;
 			return(
